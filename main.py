@@ -425,8 +425,8 @@ with expander_try_it:
       canvas_result = st_canvas(
          fill_color="rgba(255, 165, 0, 0.3)",  # Fixed fill color with some opacity
          stroke_width=15,
-         stroke_color='black',
-         background_color='white',
+         stroke_color='white',
+         background_color='black',
          background_image=None,
          update_streamlit=True,
          height=150,
