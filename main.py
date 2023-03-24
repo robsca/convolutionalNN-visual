@@ -78,6 +78,9 @@ class ConvNet(nn.Module):
                 conv_1_.update_yaxes(showticklabels=False)
                 
             conv_1_.update_layout(title_text=f'Convolution 1 : Max pooling : ReLu -> SHAPE: {x.shape}')
+            # no padding in the graph
+            conv_1_.update_xaxes(showline=False, linewidth=0, linecolor='black')
+            conv_1_.update_yaxes(showline=False, linewidth=0, linecolor='black')
 
         x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
         
@@ -103,6 +106,9 @@ class ConvNet(nn.Module):
             flatten_.update_layout(title_text=f'Mono-dimensional -> SHAPE: {x.shape}')
             # make the graph smaller
             flatten_.update_layout(height=250, width=500)
+            # take off the axis
+            flatten_.update_xaxes(showticklabels=False)
+            flatten_.update_yaxes(showticklabels=False)
 
         x = F.relu(self.fc1(x))
         
@@ -111,6 +117,9 @@ class ConvNet(nn.Module):
             ff1_.update_layout(title_text=f'Fully connected 1 : ReLu -> SHAPE: {x.shape}')
             # make the graph smaller
             ff1_.update_layout(height=250, width=500)
+            # no axis
+            ff1_.update_xaxes(showticklabels=False)
+            ff1_.update_yaxes(showticklabels=False)
 
         x = F.dropout(x, training=self.training)
         
@@ -126,6 +135,9 @@ class ConvNet(nn.Module):
             ff2.update_layout(title_text=f'Fully connected 2 -> SHAPE: {x.shape}')
             # make the graph smaller
             ff2.update_layout(height=250, width=500)
+            # no axis
+            ff2.update_xaxes(showticklabels=False)
+            ff2.update_yaxes(showticklabels=False)
         
         x = F.log_softmax(x, dim=1) #
         
@@ -134,6 +146,9 @@ class ConvNet(nn.Module):
             out.update_layout(title_text=f'log_softmax -> SHAPE: {x.shape}')
             # make the graph smaller
             out.update_layout(height=250, width=500)
+            # no axis
+            out.update_xaxes(showticklabels=False)
+            out.update_yaxes(showticklabels=False)
         
         if show_conv:
             st.plotly_chart(conv_1_, use_container_width=True)
@@ -144,6 +159,13 @@ class ConvNet(nn.Module):
             stacked.add_trace(go.Heatmap(z=drop_.data[0]['z'], showscale=False), row=3, col=1)
             stacked.add_trace(go.Heatmap(z=ff2.data[0]['z'], showscale=False), row=4, col=1)
             stacked.add_trace(go.Heatmap(z=out.data[0]['z'], showscale=False), row=5, col=1)
+            # no axis
+            stacked.update_xaxes(showticklabels=False)
+            stacked.update_yaxes(showticklabels=False)
+            # no lines in the graph
+            stacked.update_xaxes(showline=False, linewidth=0, linecolor='black')
+            stacked.update_yaxes(showline=False, linewidth=0, linecolor='black')
+
             # show
             st.plotly_chart(stacked, use_container_width=True)
 
@@ -424,7 +446,7 @@ with expander_try_it:
     with c2:
       canvas_result = st_canvas(
          fill_color="rgba(255, 165, 0, 0.3)",  # Fixed fill color with some opacity
-         stroke_width=15,
+         stroke_width=20,
          stroke_color='white',
          background_color='black',
          background_image=None,
