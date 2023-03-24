@@ -7,3 +7,4 @@ streamlit
 bokeh
 torchvision
 streamlit-drawable-canvas
+torchviz
