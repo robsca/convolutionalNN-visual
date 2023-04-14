@@ -18,3 +18,8 @@ This application is a simple demonstration of how a convolutional neural network
 streamlit run main.py
 ```
 
+
+https://user-images.githubusercontent.com/66328669/232111140-1dc41ba3-fd41-4557-a891-9d082e0c3090.mp4
+
+
+
